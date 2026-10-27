@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#eef7ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>FLASHY — Your Little Study Space</title>
+<style>
+:root{
+  --bg:#f7f5ee;
+  --card:#fffdf8;
+  --sage:#8faa91;
+  --sage-dark:#58745d;
+  --mint:#e7f1e5;
+  --cream:#fffaf0;
+  --text:#304437;
+  --muted:#7c887d;
+  --line:#e3e7df;
+  --peach:#f4d9c8;
+  --danger:#d77d72;
+  --shadow:0 10px 30px rgba(71,92,74,.09);
+  --radius:24px;
+}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+html,body{
+  margin:0;
+  padding:0;
+  min-height:100%;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+body{
+  min-height:100vh;
+}
+button,
+input,
+textarea{
+  font:inherit;
+}
+button{
+  cursor:pointer;
+}
+.hidden{
+  display:none !important;
+}
+/* =========================
+   AUTH
+========================= */
+#authScreen{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px;
+}
+.auth-box{
+  width:100%;
+  max-width:420px;
+  text-align:center;
+}
+.logo-mark{
+  width:74px;
+  height:74px;
+  margin:0 auto 18px;
+  border-radius:24px;
+  background:var(--mint);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  box-shadow:var(--shadow);
+}
+.logo{
+  font-size:34px;
+  font-weight:800;
+  letter-spacing:-1.5px;
+  margin-bottom:6px;
+}
+.tagline{
+  color:var(--muted);
+  margin-bottom:34px;
+}
+.auth-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  text-align:left;
+}
+.auth-card h2{
+  margin:0 0 7px;
+  font-size:22px;
+}
+.auth-card p{
+  margin:0 0 22px;
+  color:var(--muted);
+  font-size:14px;
+}
+.field{
+  margin-bottom:15px;
+}
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+.field input,
+.field textarea{
+  width:100%;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  border-radius:15px;
+  padding:13px 14px;
+  outline:none;
+  transition:.2s;
+}
+.field textarea{
+  min-height:110px;
+  resize:vertical;
+}
+.field input:focus,
+.field textarea:focus{
+  border-color:var(--sage);
+  box-shadow:0 0 0 3px rgba(143,170,145,.13);
+}
+.primary-btn{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:14px 18px;
+  background:var(--sage-dark);
+  color:white;
+  font-weight:700;
+  transition:.2s;
+}
+.primary-btn:active{
+  transform:scale(.98);
+}
+.secondary-btn{
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:12px 16px;
+  background:var(--card);
+  color:var(--text);
+  font-weight:650;
+}
+.auth-switch{
+  text-align:center;
+  margin-top:20px;
+  font-size:14px;
+  color:var(--muted);
+}
+.link-btn{
+  border:0;
+  background:none;
+  color:var(--sage-dark);
+  font-weight:750;
+  padding:0;
+}
+/* =========================
+   APP
+========================= */
+#app{
+  min-height:100vh;
+}
+.app-shell{
+  width:100%;
+  max-width:720px;
+  margin:auto;
+  padding:22px 18px 100px;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.mini-logo{
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  background:var(--mint);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+}
+.topbar-title{
+  font-weight:800;
+  font-size:18px;
+}
+.icon-btn{
+  width:43px;
+  height:43px;
+  border:1px solid var(--line);
+  background:var(--card);
+  border-radius:15px;
+  color:var(--text);
+  font-size:18px;
+}
+.greeting{
+  margin-bottom:22px;
+}
+.greeting small{
+  color:var(--muted);
+}
+.greeting h1{
+  margin:4px 0 0;
+  font-size:29px;
+  letter-spacing:-1px;
+}
+.hero{
+  background:var(--mint);
+  border-radius:28px;
+  padding:25px;
+  margin-bottom:22px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"✦";
+  position:absolute;
+  right:24px;
+  top:18px;
+  font-size:28px;
+  opacity:.35;
+}
+.hero h2{
+  margin:0 0 6px;
+  font-size:22px;
+}
+.hero p{
+  margin:0 0 18px;
+  color:#657568;
+  max-width:280px;
+  line-height:1.5;
+}
+.study-btn{
+  border:0;
+  background:var(--sage-dark);
+  color:white;
+  border-radius:15px;
+  padding:12px 18px;
+  font-weight:700;
+}
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:24px 2px 12px;
+}
+.section-head h2{
+  margin:0;
+  font-size:18px;
+}
+.text-btn{
+  border:0;
+  background:none;
+  color:var(--sage-dark);
+  font-weight:750;
+}
+.deck-list{
+  display:grid;
+  gap:12px;
+}
+.deck-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 5px 18px rgba(71,92,74,.045);
+}
+.deck-main{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  min-width:0;
+}
+.deck-icon{
+  width:47px;
+  height:47px;
+  flex:none;
+  border-radius:16px;
+  background:var(--cream);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+}
+.deck-info{
+  min-width:0;
+}
+.deck-info h3{
+  margin:0 0 4px;
+  font-size:16px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.deck-info span{
+  color:var(--muted);
+  font-size:13px;
+}
+.arrow{
+  color:var(--muted);
+  font-size:20px;
+}
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:var(--muted);
+  background:var(--card);
+  border:1px dashed var(--line);
+  border-radius:22px;
+}
+.empty .emoji{
+  font-size:32px;
+  margin-bottom:10px;
+}
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:15px;
+  transform:translateX(-50%);
+  width:min(440px,calc(100% - 30px));
+  background:rgba(255,253,248,.94);
+  backdrop-filter:blur(16px);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:8px;
+  display:flex;
+  gap:6px;
+  box-shadow:0 10px 30px rgba(71,92,74,.12);
+  z-index:20;
+}
+.nav-btn{
+  flex:1;
+  border:0;
+  background:none;
+  color:var(--muted);
+  padding:8px;
+  border-radius:15px;
+  font-size:12px;
+  font-weight:700;
+}
+.nav-btn.active{
+  background:var(--mint);
+  color:var(--sage-dark);
+}
+/* =========================
+   MODAL
+========================= */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(38,53,41,.28);
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:50;
+}
+.modal{
+  width:min(720px,100%);
+  background:var(--card);
+  border-radius:30px 30px 0 0;
+  padding:24px 20px 30px;
+  max-height:90vh;
+  overflow:auto;
+}
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+.modal-head h2{
+  margin:0;
+  font-size:20px;
+}
+.close-btn{
+  border:0;
+  background:var(--mint);
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  font-size:18px;
+  color:var(--text);
+}
+.modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+.modal-actions button{
+  flex:1;
+}
+/* =========================
+   DECK VIEW
+========================= */
+.back-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+.back-btn{
+  border:0;
+  background:none;
+  color:var(--text);
+  font-size:21px;
+}
+.page-title{
+  font-size:24px;
+  font-weight:800;
+  margin:0;
+}
+.deck-subtitle{
+  color:var(--muted);
+  margin:4px 0 22px;
+}
+.add-card-btn{
+  width:100%;
+  border:1px dashed var(--sage);
+  background:var(--mint);
+  color:var(--sage-dark);
+  border-radius:18px;
+  padding:14px;
+  font-weight:750;
+  margin-bottom:20px;
+}
+.card-list{
+  display:grid;
+  gap:10px;
+}
+.card-row{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+.card-row strong{
+  display:block;
+  font-size:14px;
+}
+.card-row small{
+  color:var(--muted);
+}
+.card-row-actions{
+  display:flex;
+  gap:6px;
+}
+.small-btn{
+  border:0;
+  width:36px;
+  height:36px;
+  border-radius:12px;
+  background:var(--mint);
+}
+.delete-btn{
+  background:#faece9;
+}
+/* =========================
+   STUDY
+========================= */
+.study-screen{
+  min-height:100vh;
+  padding:18px;
+  max-width:720px;
+  margin:auto;
+}
+.study-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+.progress-text{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+}
+.flashcard{
+  min-height:410px;
+  perspective:1000px;
+  margin:10px 0 22px;
+}
+.flashcard-inner{
+  width:100%;
+  min-height:410px;
+  position:relative;
+  transition:transform .55s;
+  transform-style:preserve-3d;
+}
+.flashcard.flipped .flashcard-inner{
+  transform:rotateY(180deg);
+}
+.face{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:32px;
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:34px;
+  text-align:center;
+}
+.face.back{
+  transform:rotateY(180deg);
+  background:var(--mint);
+}
+.face-label{
+  color:var(--sage-dark);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+  margin-bottom:17px;
+}
+.face-text{
+  font-size:24px;
+  line-height:1.35;
+  font-weight:750;
+  max-width:560px;
+}
+.tap-hint{
+  margin-top:24px;
+  color:var(--muted);
+  font-size:13px;
+}
+.study-actions{
+  display:flex;
+  gap:10px;
+}
+.study-actions button{
+  flex:1;
+  border:0;
+  border-radius:17px;
+  padding:14px 10px;
+  font-weight:750;
+}
+.review-btn{
+  background:#faece9;
+  color:#a65f57;
+}
+.know-btn{
+  background:var(--mint);
+  color:var(--sage-dark);
+}
+.finish-message{
+  text-align:center;
+  background:var(--mint);
+  border-radius:28px;
+  padding:35px 24px;
+}
+.finish-message .big{
+  font-size:44px;
+}
+.finish-message h2{
+  margin:8px 0;
+}
+.finish-message p{
+  color:var(--muted);
+}
+/* =========================
+   SETTINGS
+========================= */
+.settings-list{
+  display:grid;
+  gap:10px;
+}
+.setting{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.setting-info strong{
+  display:block;
+  font-size:15px;
+}
+.setting-info span{
+  color:var(--muted);
+  font-size:12px;
+}
+.setting button{
+  border:1px solid var(--line);
+  background:var(--mint);
+  color:var(--sage-dark);
+  border-radius:12px;
+  padding:9px 12px;
+  font-weight:700;
+}
+.danger{
+  color:var(--danger) !important;
+  background:#faece9 !important;
+}
+/* =========================
+   TOAST
+========================= */
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--text);
+  color:white;
+  padding:11px 16px;
+  border-radius:14px;
+  font-size:13px;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:100;
+  max-width:calc(100% - 40px);
+  text-align:center;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+/* =========================
+   DARK MODE
+========================= */
+body.dark{
+  --bg:#1d2821;
+  --card:#263329;
+  --sage:#8eaa92;
+  --sage-dark:#a8c3ab;
+  --mint:#314337;
+  --cream:#30392f;
+  --text:#edf3ed;
+  --muted:#aab7ac;
+  --line:#3a493e;
+  --peach:#5a4438;
+  --shadow:0 10px 30px rgba(0,0,0,.2);
+}
+body.dark .field input,
+body.dark .field textarea{
+  background:#202c23;
+  color:var(--text);
+}
+body.dark .bottom-nav{
+  background:rgba(38,51,41,.94);
+}
+/* =========================
+   RESPONSIVE
+========================= */
+@media(min-width:700px){
+  .modal-bg{
+    align-items:center;
+    padding:20px;
+  }
+  .modal{
+    border-radius:30px;
+    max-width:520px;
+  }
+  .app-shell{
+    padding-top:30px;
+  }
+}
+@media(max-width:420px){
+  .face-text{
+    font-size:21px;
+  }
+  .flashcard,
+  .flashcard-inner{
+    min-height:370px;
+  }
+}
+</style>
+</head>
+<body>
+<!-- =========================
+     AUTH SCREEN
+========================= -->
+<section id="authScreen">
+  <div class="auth-box">
+    <div class="logo-mark">🌱</div>
+    <div class="logo">FLASHY</div>
+    <div class="tagline">
+      your little study space ♡
+    </div>
+    <!-- LOGIN -->
+    <div id="loginBox" class="auth-card">
+      <h2>Welcome back! 🌷</h2>
+      <p>Log in to continue studying.</p>
+      <div class="field">
+        <label>Username</label>
+        <input id="loginUsername" type="text" autocomplete="username" placeholder="your username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="loginPassword" type="password" autocomplete="current-password" placeholder="your password">
+      </div>
+      <button class="primary-btn" onclick="login()">
+        Log In
+      </button>
+      <div class="auth-switch">
+        Don't have an account?
+        <button class="link-btn" onclick="showSignup()">Create Account</button>
+      </div>
+    </div>
+    <!-- SIGN UP -->
+    <div id="signupBox" class="auth-card hidden">
+      <h2>Create your space 🌿</h2>
+      <p>Your study data stays saved on this device.</p>
+      <div class="field">
+        <label>Your Name</label>
+        <input id="signupName" type="text" placeholder="e.g. CJ">
+      </div>
+      <div class="field">
+        <label>Username</label>
+        <input id="signupUsername" type="text" autocomplete="username" placeholder="choose a username">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="signupPassword" type="password" autocomplete="new-password" placeholder="choose a password">
+      </div>
+      <div class="field">
+        <label>Confirm Password</label>
+        <input id="signupConfirm" type="password" autocomplete="new-password" placeholder="repeat your password">
+      </div>
+      <button class="primary-btn" onclick="createAccount()">
+        Create Account
+      </button>
+      <div class="auth-switch">
+        Already have an account?
+        <button class="link-btn" onclick="showLogin()">Log In</button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- =========================
+     APP
+========================= -->
+<section id="app" class="hidden">
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="mini-logo">🌱</div>
+        <div class="topbar-title">
+          FLASHY
+        </div>
+      </div>
+      <button class="icon-btn" onclick="showSettings()">
+        ⚙️
+      </button>
+    </header>
+    <!-- HOME -->
+    <section id="homePage">
+      <div class="greeting">
+        <small id="greetingText">
+          Good day!
+        </small>
+        <h1>
+          Hi, <span id="userName">friend</span>! 👋
+        </h1>
+      </div>
+      <div class="hero">
+        <h2>Ready to study?</h2>
+        <p>
+          Take it one card at a time.
+          You've got this. 🌷
+        </p>
+        <button class="study-btn" onclick="studyRandomDeck()">
+          Study Now
+        </button>
+      </div>
+      <div class="section-head">
+        <h2>My Decks</h2>
+        <button class="text-btn" onclick="openCreateDeck()">
+          + New Deck
+        </button>
+      </div>
+      <div id="deckList" class="deck-list"></div>
+    </section>
+    <!-- DECKS PAGE -->
+    <section id="decksPage" class="hidden">
+      <div class="section-head">
+        <h2>My Decks</h2>
+        <button class="text-btn" onclick="openCreateDeck()">
+          + New Deck
+        </button>
+      </div>
+      <div id="allDeckList" class="deck-list"></div>
+    </section>
+    <!-- SETTINGS -->
+    <section id="settingsPage" class="hidden">
+      <div class="back-row">
+        <button class="back-btn" onclick="showHome()">
+          ←
+        </button>
+        <h1 class="page-title">
+          Settings
+        </h1>
+      </div>
+      <div class="settings-list">
+        <div class="setting">
+          <div class="setting-info">
+            <strong>🌙 Appearance</strong>
+            <span>Switch between light and dark</span>
+          </div>
+          <button onclick="toggleDarkMode()">
+            Toggle
+          </button>
+        </div>
+        <div class="setting">
+          <div class="setting-info">
+            <strong>💾 Backup</strong>
+            <span>Save your study data</span>
+          </div>
+          <button onclick="downloadBackup()">
+            Export
+          </button>
+        </div>
+        <div class="setting">
+          <div class="setting-info">
+            <strong>📥 Restore</strong>
+            <span>Bring back a saved backup</span>
+          </div>
+          <button onclick="document.getElementById('restoreFile').click()">
+            Import
+          </button>
+          <input
+            id="restoreFile"
+            type="file"
+            accept=".json"
+            style="display:none"
+            onchange="restoreBackup(event)"
+          >
+        </div>
+        <div class="setting">
+          <div class="setting-info">
+            <strong>🚪 Log Out</strong>
+            <span>Your saved data will stay here</span>
+          </div>
+          <button onclick="logout()">
+            Log Out
+          </button>
+        </div>
+        <div class="setting">
+          <div class="setting-info">
+            <strong>🗑️ Delete Account</strong>
+            <span>Permanently remove local data</span>
+          </div>
+          <button class="danger" onclick="deleteAccount()">
+            Delete
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button id="navHome" class="nav-btn active" onclick="showHome()">
+      🏡<br>Home
+    </button>
+    <button id="navDecks" class="nav-btn" onclick="showDecks()">
+      📚<br>Decks
+    </button>
+    <button id="navSettings" class="nav-btn" onclick="showSettings()">
+      ⚙️<br>Settings
+    </button>
+  </nav>
+</section>
+<!-- =========================
+     DECK VIEW
+========================= -->
+<section id="deckView" class="hidden">
+  <main class="app-shell">
+    <div class="back-row">
+      <button class="back-btn" onclick="showDecks()">
+        ←
+      </button>
+      <div>
+        <h1 id="deckViewTitle" class="page-title">
+          Deck
+        </h1>
+        <div id="deckViewSubtitle" class="deck-subtitle">
+          0 cards
+        </div>
+      </div>
+    </div>
+    <button class="add-card-btn" onclick="openCreateCard()">
+      + Add a Flashcard
+    </button>
+    <div id="cardList" class="card-list"></div>
+  </main>
+</section>
+<!-- =========================
+     STUDY VIEW
+========================= -->
+<section id="studyView" class="hidden">
+  <main class="study-screen">
+    <div class="study-top">
+      <button class="back-btn" onclick="exitStudy()">
+        ←
+      </button>
+      <div id="studyDeckName" class="progress-text">
+        Deck
+      </div>
+      <div id="studyProgress" class="progress-text">
+        1 / 1
+      </div>
+    </div>
+    <div id="studyCardArea"></div>
+  </main>
+</section>
+<!-- =========================
+     MODAL
+========================= -->
+div id="modalBg" class="modal-bg hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modalTitle">
+        New Deck
+      </h2>
+      <button class="close-btn" onclick="closeModal()">
+        ×
+      </button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<div id="toast" class="toast">
+  Saved 🌱
+</div>
+<script>
+/* =========================================================
+   FLASHY — LOCAL OFFLINE DATA SYSTEM
+========================================================= */
+const STORAGE_KEY = "flashy_accounts_v1";
+const SESSION_KEY = "flashy_session_v1";
+let accounts = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+let currentUser = localStorage.getItem(SESSION_KEY) || null;
+let currentDeckId = null;
+let editingCardId = null;
+let studyDeckId = null;
+let studyCards = [];
+let studyIndex = 0;
+let studyFlipped = false;
+/* =========================================================
+   SAVE
+========================================================= */
+function saveAccounts(){
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(accounts)
+  );
+}
+/* =========================================================
+   HELPERS
+========================================================= */
+function uid(){
+  return Date.now().toString(36) +
+    Math.random().toString(36).slice(2,8);
+}
+function escapeHTML(value){
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+function getUser(){
+  return currentUser && accounts[currentUser]
+    ? accounts[currentUser]
+    : null;
+}
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  },1800);
+}
+/* =========================================================
+   AUTH
+========================================================= */
+function showSignup(){
+  document.getElementById("loginBox")
+    .classList.add("hidden");
+  document.getElementById("signupBox")
+    .classList.remove("hidden");
+}
+function showLogin(){
+  document.getElementById("signupBox")
+    .classList.add("hidden");
+  document.getElementById("loginBox")
+    .classList.remove("hidden");
+}
+function createAccount(){
+  const name =
+    document.getElementById("signupName").value.trim();
+  const username =
+    document.getElementById("signupUsername").value.trim().toLowerCase();
+  const password =
+    document.getElementById("signupPassword").value;
+  const confirm =
+    document.getElementById("signupConfirm").value;
+  if(!name || !username || !password || !confirm){
+    alert("Please fill in everything 🌷");
+    return;
+  }
+  if(password !== confirm){
+    alert("Your passwords don't match.");
+    return;
+  }
+  if(accounts[username]){
+    alert("That username already exists.");
+    return;
+  }
+  accounts[username] = {
+    name:name,
+    username:username,
+    password:password,
+    createdAt:new Date().toISOString(),
+    decks:[]
+  };
+  saveAccounts();
+  currentUser = username;
+  localStorage.setItem(
+    SESSION_KEY,
+    currentUser
+  );
+  document.getElementById("signupName").value = "";
+  document.getElementById("signupUsername").value = "";
+  document.getElementById("signupPassword").value = "";
+  document.getElementById("signupConfirm").value = "";
+  enterApp();
+}
+function login(){
+  const username =
+    document.getElementById("loginUsername")
+      .value.trim()
+      .toLowerCase();
+  const password =
+    document.getElementById("loginPassword").value;
+  const account = accounts[username];
+  if(!account || account.password !== password){
+    alert("Username or password is incorrect.");
+    return;
+  }
+  currentUser = username;
+  localStorage.setItem(
+    SESSION_KEY,
+    currentUser
+  );
+  enterApp();
+}
+function logout(){
+  currentUser = null;
+  localStorage.removeItem(SESSION_KEY);
+  document.getElementById("app")
+    .classList.add("hidden");
+  document.getElementById("deckView")
+    .classList.add("hidden");
+  document.getElementById("studyView")
+    .classList.add("hidden");
+  document.getElementById("authScreen")
+    .classList.remove("hidden");
+  showLogin();
+}
+function deleteAccount(){
+  const yes = confirm(
+    "Delete this account and all its study data?"
+  );
+  if(!yes) return;
+  delete accounts[currentUser];
+  saveAccounts();
+  localStorage.removeItem(SESSION_KEY);
+  currentUser = null;
+  location.reload();
+}
+/* =========================================================
+   ENTER APP
+========================================================= */
+function enterApp(){
+  document.getElementById("authScreen")
+    .classList.add("hidden");
+  document.getElementById("app")
+    .classList.remove("hidden");
+  document.getElementById("deckView")
+    .classList.add("hidden");
+  document.getElementById("studyView")
+    .classList.add("hidden");
+  document.getElementById("userName")
+    .textContent = getUser().name;
+  updateGreeting();
+  renderDecks();
+  showHome();
+}
+function updateGreeting(){
+  const hour = new Date().getHours();
+  let greeting = "Good day!";
+  if(hour < 12){
+    greeting = "Good morning! ☀️";
+  }else if(hour < 18){
+    greeting = "Good afternoon! 🌤️";
+  }else{
+    greeting = "Good evening! 🌙";
+  }
+  document.getElementById("greetingText")
+    .textContent = greeting;
+}
+/* =========================================================
+   NAVIGATION
+========================================================= */
+function hideAllMain(){
+  document.getElementById("homePage")
+    .classList.add("hidden");
+  document.getElementById("decksPage")
+    .classList.add("hidden");
+  document.getElementById("settingsPage")
+    .classList.add("hidden");
+  document.getElementById("deckView")
+    .classList.add("hidden");
+  document.getElementById("studyView")
+    .classList.add("hidden");
+}
+function updateNav(active){
+  document.querySelectorAll(".nav-btn")
+    .forEach(btn => btn.classList.remove("active"));
+  if(active === "home"){
+    document.getElementById("navHome")
+      .classList.add("active");
+  }
+  if(active === "decks"){
+    document.getElementById("navDecks")
+      .classList.add("active");
+  }
+  if(active === "settings"){
+    document.getElementById("navSettings")
+      .classList.add("active");
+  }
+}
+function showHome(){
+  hideAllMain();
+  document.getElementById("app")
+    .classList.remove("hidden");
+  document.getElementById("homePage")
+    .classList.remove("hidden");
+  updateNav("home");
+  renderDecks();
+}
+function showDecks(){
+  hideAllMain();
+  document.getElementById("app")
+    .classList.remove("hidden");
+  document.getElementById("decksPage")
+    .classList.remove("hidden");
+  updateNav("decks");
+  renderAllDecks();
+}
+function showSettings(){
+  hideAllMain();
+  document.getElementById("app")
+    .classList.remove("hidden");
+  document.getElementById("settingsPage")
+    .classList.remove("hidden");
+  updateNav("settings");
+}
+/* =========================================================
+   DECKS
+========================================================= */
+function renderDecks(){
+  const user = getUser();
+  if(!user) return;
+  const container =
+    document.getElementById("deckList");
+  if(user.decks.length === 0){
+    container.innerHTML = `
+      <div class="empty">
+        <div class="emoji">🌱</div>
+        <strong>Your study space is empty.</strong>
+        <p>
+          Create your first deck and start learning.
+        </p>
+        <button
+          class="secondary-btn"
+          onclick="openCreateDeck()"
+        >
+          + Create a Deck
+        </button>
+      </div>
+    `;
+    return;
+  }
+  container.innerHTML =
+    user.decks.slice(0,4)
+      .map(deckHTML)
+      .join("");
+}
+function renderAllDecks(){
+  const user = getUser();
+  const container =
+    document.getElementById("allDeckList");
+  if(!user || user.decks.length === 0){
+    container.innerHTML = `
+      <div class="empty">
+        <div class="emoji">📚</div>
+        <strong>No decks yet.</strong>
+        <p>Create one when you're ready.</p>
+      </div>
+    `;
+    return;
+  }
+  container.innerHTML =
+    user.decks.map(deckHTML).join("");
+}
+function deckHTML(deck){
+  return `
+    <div
+      class="deck-card"
+      onclick="openDeck('${deck.id}')"
+    >
+      <div class="deck-main">
+        <div class="deck-icon">
+          ${deck.icon || "📚"}
+        </div>
+        <div class="deck-info">
+          <h3>
+            ${escapeHTML(deck.name)}
+          </h3>
+          <span>
+            ${deck.cards.length}
+            ${deck.cards.length === 1 ? "card" : "cards"}
+          </span>
+        </div>
+      </div>
+      <div class="arrow">
+        ›
+      </div>
+    </div>
+  `;
+}
+function openCreateDeck(){
+  openModal(
+    "New Deck",
+    `
+      <div class="field">
+        <label>Deck Name</label>
+        <input
+          id="newDeckName"
+          placeholder="e.g. Philosophy"
+          maxlength="50"
+        >
+      </div>
+      <div class="field">
+        <label>Choose an icon</label>
+        <input
+          id="newDeckIcon"
+          value="📚"
+          maxlength="2"
+        >
+      </div>
+      <div class="modal-actions">
+        <button
+          class="secondary-btn"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
+        <button
+          class="primary-btn"
+          onclick="createDeck()"
+        >
+          Create
+        </button>
+      </div>
+    `
+  );
+}
+function createDeck(){
+  const name =
+    document.getElementById("newDeckName")
+      .value.trim();
+  const icon =
+    document.getElementById("newDeckIcon")
+      .value.trim() || "📚";
+  if(!name){
+    alert("Give your deck a name 🌷");
+    return;
+  }
+  const user = getUser();
+  user.decks.push({
+    id:uid(),
+    name:name,
+    icon:icon,
+    cards:[]
+  });
+  saveAccounts();
+  closeModal();
+  renderDecks();
+  renderAllDecks();
+  showToast("Deck created 🌱");
+}
+/* =========================================================
+   OPEN DECK
+========================================================= */
+function openDeck(deckId){
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === deckId);
+  if(!deck) return;
+  currentDeckId = deckId;
+  document.getElementById("app")
+    .classList.add("hidden");
+  document.getElementById("deckView")
+    .classList.remove("hidden");
+  document.getElementById("deckViewTitle")
+    .textContent = deck.name;
+  document.getElementById("deckViewSubtitle")
+    .textContent =
+      `${deck.cards.length} ${
+        deck.cards.length === 1 ? "card" : "cards"
+      }`;
+  renderCards();
+}
+function renderCards(){
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === currentDeckId);
+  const container =
+    document.getElementById("cardList");
+  if(!deck || deck.cards.length === 0){
+    container.innerHTML = `
+      <div class="empty">
+        <div class="emoji">🃏</div>
+        <strong>No flashcards yet.</strong>
+        <p>
+          Add your first question and answer.
+        </p>
+      </div>
+    `;
+    return;
+  }
+  container.innerHTML =
+    deck.cards.map(card => `
+      <div class="card-row">
+        <div>
+          <strong>
+            ${escapeHTML(card.front)}
+          </strong>
+          <small>
+            ${escapeHTML(card.back)}
+          </small>
+        </div>
+        <div class="card-row-actions">
+          <button
+            class="small-btn"
+            onclick="event.stopPropagation(); editCard('${card.id}')"
+          >
+            ✏️
+          </button>
+          <button
+            class="small-btn delete-btn"
+            onclick="event.stopPropagation(); deleteCard('${card.id}')"
+          >
+            🗑️
+          </button>
+        </div>
+      </div>
+    `).join("");
+}
+/* =========================================================
+   CARDS
+========================================================= */
+function openCreateCard(){
+  editingCardId = null;
+  openModal(
+    "New Flashcard",
+    cardFormHTML()
+  );
+}
+function cardFormHTML(card = {}){
+  return `
+    <div class="field">
+      <label>Question</label>
+      <textarea
+        id="cardFront"
+        maxlength="400"
+        placeholder="e.g. What is epistemology?"
+      >${escapeHTML(card.front || "")}</textarea>
+    </div>
+    <div class="field">
+      <label>Answer</label>
+      <textarea
+        id="cardBack"
+        maxlength="400"
+        placeholder="e.g. The study of knowledge."
+      >${escapeHTML(card.back || "")}</textarea>
+    </div>
+    <div class="modal-actions">
+      <button
+        class="secondary-btn"
+        onclick="closeModal()"
+      >
+        Cancel
+      </button>
+      <button
+        class="primary-btn"
+        onclick="saveCard()"
+      >
+        Save Card
+      </button>
+    </div>
+  `;
+}
+function saveCard(){
+  const front =
+    document.getElementById("cardFront")
+      .value.trim();
+  const back =
+    document.getElementById("cardBack")
+      .value.trim();
+  if(!front || !back){
+    alert("Please fill in both sides of the card.");
+    return;
+  }
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === currentDeckId);
+  if(editingCardId){
+    const card =
+      deck.cards.find(c => c.id === editingCardId);
+    if(card){
+      card.front = front;
+      card.back = back;
+    }
+  }else{
+    deck.cards.push({
+      id:uid(),
+      front:front,
+      back:back,
+      known:false,
+      reviews:0
+    });
+  }
+  saveAccounts();
+  closeModal();
+  renderCards();
+  document.getElementById("deckViewSubtitle")
+    .textContent =
+      `${deck.cards.length} ${
+        deck.cards.length === 1 ? "card" : "cards"
+      }`;
+  renderDecks();
+  showToast("Card saved 🌷");
+}
+function editCard(cardId){
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === currentDeckId);
+  const card =
+    deck.cards.find(c => c.id === cardId);
+  if(!card) return;
+  editingCardId = cardId;
+  openModal(
+    "Edit Flashcard",
+    cardFormHTML(card)
+  );
+}
+function deleteCard(cardId){
+  const yes =
+    confirm("Delete this flashcard?");
+  if(!yes) return;
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === currentDeckId);
+  deck.cards =
+    deck.cards.filter(c => c.id !== cardId);
+  saveAccounts();
+  renderCards();
+  document.getElementById("deckViewSubtitle")
+    .textContent =
+      `${deck.cards.length} ${
+        deck.cards.length === 1 ? "card" : "cards"
+      }`;
+  renderDecks();
+  showToast("Card removed");
+}
+/* =========================================================
+   STUDY
+========================================================= */
+function studyRandomDeck(){
+  const user = getUser();
+  if(!user || user.decks.length === 0){
+    openCreateDeck();
+    return;
+  }
+  const decksWithCards =
+    user.decks.filter(d => d.cards.length > 0);
+  if(decksWithCards.length === 0){
+    alert("Add some flashcards first 🌱");
+    return;
+  }
+  const deck =
+    decksWithCards[
+      Math.floor(
+        Math.random() * decksWithCards.length
+      )
+    ];
+  startStudy(deck.id);
+}
+function startStudy(deckId){
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === deckId);
+  if(!deck || deck.cards.length === 0){
+    alert("This deck has no cards yet.");
+    return;
+  }
+  studyDeckId = deckId;
+  studyCards = [...deck.cards];
+  studyIndex = 0;
+  studyFlipped = false;
+  document.getElementById("app")
+    .classList.add("hidden");
+  document.getElementById("deckView")
+    .classList.add("hidden");
+  document.getElementById("studyView")
+    .classList.remove("hidden");
+  document.getElementById("studyDeckName")
+    .textContent = deck.name;
+  renderStudyCard();
+}
+function renderStudyCard(){
+  const area =
+    document.getElementById("studyCardArea");
+  if(studyIndex >= studyCards.length){
+    area.innerHTML = `
+      <div class="finish-message">
+        <div class="big">🌷</div>
+        <h2>Nice work!</h2>
+        <p>
+          You finished this study session.
+        </p>
+        <button
+          class="primary-btn"
+          onclick="exitStudy()"
+        >
+          Done
+        </button>
+      </div>
+    `;
+    return;
+  }
+  const card = studyCards[studyIndex];
+  studyFlipped = false;
+  document.getElementById("studyProgress")
+    .textContent =
+      `${studyIndex + 1} / ${studyCards.length}`;
+  area.innerHTML = `
+    <div
+      class="flashcard"
+      onclick="flipStudyCard()"
+    >
+      <div
+        id="studyFlip"
+        class="flashcard-inner"
+      >
+        <div class="face front">
+          <div class="face-label">
+            Question
+          </div>
+          <div class="face-text">
+            ${escapeHTML(card.front)}
+          </div>
+          <div class="tap-hint">
+            tap to reveal ♡
+          </div>
+        </div>
+        <div class="face back">
+          <div class="face-label">
+            Answer
+          </div>
+          <div class="face-text">
+            ${escapeHTML(card.back)}
+          </div>
+          <div class="tap-hint">
+            tap to flip back
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="study-actions">
+      <button
+        class="review-btn"
+        onclick="rateCard(false)"
+      >
+        ↻ Need Review
+      </button>
+      <button
+        class="know-btn"
+        onclick="rateCard(true)"
+      >
+        ✓ Got It
+      </button>
+    </div>
+  `;
+}
+function flipStudyCard(){
+  const card =
+    document.querySelector(".flashcard");
+  if(!card) return;
+  card.classList.toggle("flipped");
+  studyFlipped =
+    card.classList.contains("flipped");
+}
+function rateCard(known){
+  const user = getUser();
+  const deck =
+    user.decks.find(d => d.id === studyDeckId);
+  if(!deck) return;
+  const original =
+    deck.cards.find(
+      c => c.id === studyCards[studyIndex].id
+    );
+  if(original){
+    original.known = known;
+    original.reviews =
+      (original.reviews || 0) + 1;
+    original.lastReviewed =
+      new Date().toISOString();
+  }
+  saveAccounts();
+  studyIndex++;
+  renderStudyCard();
+}
+function exitStudy(){
+  document.getElementById("studyView")
+    .classList.add("hidden");
+  document.getElementById("app")
+    .classList.remove("hidden");
+  showHome();
+}
+/* =========================================================
+   MODAL
+========================================================= */
+function openModal(title,content){
+  document.getElementById("modalTitle")
+    .textContent = title;
+  document.getElementById("modalContent")
+    .innerHTML = content;
+  document.getElementById("modalBg")
+    .classList.remove("hidden");
+}
+function closeModal(){
+  document.getElementById("modalBg")
+    .classList.add("hidden");
+}
+/* =========================================================
+   DARK MODE
+========================================================= */
+function toggleDarkMode(){
+  document.body.classList.toggle("dark");
+  const enabled =
+    document.body.classList.contains("dark");
+  localStorage.setItem(
+    "flashy_dark_mode",
+    enabled ? "1" : "0"
+  );
+}
+/* =========================================================
+   BACKUP
+========================================================= */
+function downloadBackup(){
+  const user = getUser();
+  if(!user) return;
+  const data = JSON.stringify(
+    user,
+    null,
+    2
+  );
+  const blob =
+    new Blob(
+      [data],
+      {type:"application/json"}
+    );
+  const url =
+    URL.createObjectURL(blob);
+  const a =
+    document.createElement("a");
+  a.href = url;
+  a.download =
+    `flashy-${user.username}-backup.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Backup saved 💾");
+}
+function restoreBackup(event){
+  const file =
+    event.target.files[0];
+  if(!file) return;
+  const reader =
+    new FileReader();
+  reader.onload = function(){
+    try{
+      const data =
+        JSON.parse(reader.result);
+      if(
+        !data.username ||
+        !Array.isArray(data.decks)
+      ){
+        throw new Error();
+      }
+      const yes =
+        confirm(
+          "Restore this backup? Your current account with the same username will be replaced."
+        );
+      if(!yes) return;
+      accounts[data.username] = data;
+      saveAccounts();
+      currentUser = data.username;
+      localStorage.setItem(
+        SESSION_KEY,
+        currentUser
+      );
+      enterApp();
+      showToast("Backup restored 🌱");
+    }catch{
+      alert(
+        "That backup file doesn't look valid."
+      );
+    }
+  };
+  reader.readAsText(file);
+}
+/* =========================================================
+   STARTUP
+========================================================= */
+function startup(){
+  const dark =
+    localStorage.getItem("flashy_dark_mode");
+  if(dark === "1"){
+    document.body.classList.add("dark");
+  }
+  if(currentUser && accounts[currentUser]){
+    enterApp();
+  }else{
+    document.getElementById("authScreen")
+      .classList.remove("hidden");
+  }
+}
+startup();
+</script>
+</body>
+</html>
